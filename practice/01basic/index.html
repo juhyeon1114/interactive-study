@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px 30px;
+            cursor: pointer;
+        }
+
+        .arrowWrap {
+            margin: 30px;
+        }
+
+        .arrowWrap img {
+            transition: transform 2s cubic-bezier(1.000, -0.010, 0.175, 0.970);
+            /* transition: all .2s ease-in-out; */
+            width: 30%;
+        }
+    </style>
+
+    <script>
+        let rotateNum = 0;
+        window.onload = function () {
+            const resetBtn = document.querySelector('.resetBtn');
+            const startBtn = document.querySelector('.startBtn');
+            const arrow = document.querySelector('.arrow');
+            const h1 = document.querySelector('h1');
+
+            startBtn.addEventListener('click', function () {
+                rotateNum = Math.round(Math.random() * 360) + 360 * 10;
+                rotating(rotateNum)
+            });
+
+            resetBtn.addEventListener('click', function () {
+                rotating(0);
+            });
+
+            function rotating(num) {
+                h1.innerHTML = `${num} deg`;
+                arrow.style.transform = `rotate(${num}deg)`;
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <button type="button" class="resetBtn">리셋</button>
+    <button type="button" class="startBtn">회전</button>
+    <h1>0deg</h1>
+    <div class="arrowWrap">
+        <img src="./image/up-arrow.svg" class="arrow" alt="arrow">
+    </div>
+</body>
+
+</html>

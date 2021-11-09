@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            transition: all 2.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .navi {
+            position: fixed;
+            left: 50%;
+            top: 46%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px 30px;
+            cursor: pointer;
+        }
+
+        section {
+            height: 100vh;
+            width: 100vw;
+            border-top: 2px dashed rgba(0, 0, 0, .5);
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            const prevBtn = document.querySelector('.prevBtn');
+            const nextBtn = document.querySelector('.nextBtn');
+            const h1 = document.querySelector('h1');
+            const bgColors = ['#85ffbd', '#fffb7d', '#e0c3fc', '#00dbde'];
+            const sections = document.querySelectorAll('section');
+
+            let page = 0;
+            let total = sections.length;
+
+            prevBtn.addEventListener('click', function () {
+                page > 0 ? page-- : page = total;
+                pageChangeFunc();
+                window.scrollTo({
+                    top: sections[page].offsetTop,
+                    behavior: 'smooth'
+                })
+            });
+
+            nextBtn.addEventListener('click', function () {
+                page < total - 1 ? page++ : page = 0;
+                pageChangeFunc();
+                window.scrollTo({
+                    top: sections[page].offsetTop,
+                    behavior: 'smooth'
+                })
+            });
+
+            function pageChangeFunc() {
+                h1.innerHTML = `${page+1} Page`;
+                document.querySelector('body').style.background = bgColors[page];
+            }
+
+
+            pageChangeFunc();
+
+            window.addEventListener('scroll', function(e) {
+                const scroll = window.scrollY;
+
+                for (let i=0; i<total; i++) {
+                    if (
+                        scroll > sections[i].offsetTop - window.outerHeight/1.5 &&
+                        scroll < sections[i].offsetTop - window.outerHeight/1.5 + sections[i].offsetHeight
+                    ) {
+                        page = i;
+                        break;
+                    }
+                }
+
+                pageChangeFunc();
+            })
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="navi">
+        <button type="button" class="prevBtn">PREV</button>
+        <button type="button" class="nextBtn">NEXT</button>
+        <h1></h1>
+    </div>
+
+    <section>
+        <h2>P1</h2>
+    </section>
+
+    <section>
+        <h2>P2</h2>
+    </section>
+
+    <section>
+        <h2>P3</h2>
+    </section>
+
+    <section>
+        <h2>P4</h2>
+    </section>
+</body>
+
+</html>
