@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    section>div {
+        max-width: 320px;
+    }
+
+    img {
+        width: 400px;
+        position: fixed;
+        left:50%;
+        top:50%;
+        opacity: 0;
+    }
+    img.left {
+        left:30%;
+        top:25%;
+        transform: rotate(-30deg) translate(-150px, -150px);
+        transition: all 0.5s ease-in-out;
+    }
+    img.right {
+        left:60%;
+        top:55%;
+        transform: rotate(30deg) translate(150px, 150px);
+        transition: all 0.8s ease-in-out;
+    }
+
+    img.show {
+        opacity: 1;
+        transform: rotate(0) translate(0,0);
+    }
+</style>
+
+<script>
+    let scroll = 0;
+    let currentPos = 0;
+    let currentSection;
+    let images = [];
+    let sections = [];
+
+    window.onload = function() {
+        sections = document.querySelectorAll('section');
+        leftImages = document.querySelectorAll('img.left');
+        rightImages = document.querySelectorAll('img.right');
+
+        window.addEventListener('scroll', function(e) {
+            scrollEvent(e);
+        })
+
+        function scrollEvent(e) {
+            for (let i=0; i<sections.length; i++) {
+                const section = sections[i];
+                console.log(section.offsetTop)
+
+                if (section.offsetTop < window.scrollY && section.offsetTop + section.offsetHeight > window.scrollY) {
+                    currentSection = section;
+                    currentPos = i;
+                    break;
+                }
+            }
+
+            leftImages.forEach(image => {
+                image.classList.remove('show');
+            });
+            rightImages.forEach(image => {
+                image.classList.remove('show');
+            });
+
+            leftImages[currentPos].classList.add('show');
+            rightImages[currentPos].classList.add('show');
+        }
+
+        scrollEvent();
+    }
+</script>
+
+<body>
+
+    <section>
+        <div>
+            <h2>hello1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum malesuada pellentesque. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Cras fermentum lacus in dolor dapibus egestas. Orci
+                varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse feugiat
+                turpis in aliquet hendrerit. Vestibulum sit amet finibus risus. Fusce venenatis eros sapien, vitae
+                tempus dolor tempor interdum. Proin augue enim, ornare id quam vel, lobortis sagittis risus. Proin
+                tincidunt nulla ut risus commodo, eget scelerisque augue fringilla. Nunc viverra urna arcu, dictum
+                egestas magna rhoncus nec.</p>
+            <img class="left" src="./image/nike_1_1.JPG">
+            <img class="right" src="./image/nike_1_2.JPG">
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <h2>hello2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum malesuada pellentesque. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Cras fermentum lacus in dolor dapibus egestas. Orci
+                varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse feugiat
+                turpis in aliquet hendrerit. Vestibulum sit amet finibus risus. Fusce venenatis eros sapien, vitae
+                tempus dolor tempor interdum. Proin augue enim, ornare id quam vel, lobortis sagittis risus. Proin
+                tincidunt nulla ut risus commodo, eget scelerisque augue fringilla. Nunc viverra urna arcu, dictum
+                egestas magna rhoncus nec.</p>
+            <img class="left" src="./image/nike_2_1.JPG">
+            <img class="right" src="./image/nike_2_2.JPG">
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <h2>hello3</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum malesuada pellentesque. Interdum et
+                malesuada fames ac ante ipsum primis in faucibus. Cras fermentum lacus in dolor dapibus egestas. Orci
+                varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse feugiat
+                turpis in aliquet hendrerit. Vestibulum sit amet finibus risus. Fusce venenatis eros sapien, vitae
+                tempus dolor tempor interdum. Proin augue enim, ornare id quam vel, lobortis sagittis risus. Proin
+                tincidunt nulla ut risus commodo, eget scelerisque augue fringilla. Nunc viverra urna arcu, dictum
+                egestas magna rhoncus nec.</p>
+            <img class="left" src="./image/nike_3_1.JPG">
+            <img class="right" src="./image/nike_3_2.JPG">
+        </div>
+    </section>
+</body>
+
+</html>
